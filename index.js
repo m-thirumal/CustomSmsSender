@@ -22,10 +22,10 @@ exports.handler = async(event) => {
     let code = buff.toString("ascii")
     console.log("Code ==> ", code)
     if (event.triggerSource == 'CustomSMSSender_SignUp') {
-        message = 'Dear ' + event.userAttributes.name + ', Your OTP to SignUp is ' +  
+        message = 'Dear ' + event.request.userAttributes.name + ', Your OTP to SignUp is ' +  
         code + ' and valid for 5 minutes. Do not disclose it to anyone for security reasons.'
     } else if (event.triggerSource == 'CustomSMSSender_ResendCode') {
-        message = 'Dear ' + event.userAttributes.name + ', Your OTP ' + code + ' to verify/confirm the account'
+        message = 'Dear ' + event.request.userAttributes.name + ', Your OTP ' + code + ' to verify/confirm the account'
     } else {
         console.log("SMS message is not implemented.....for the trriger source", event.triggerSource)
         return
