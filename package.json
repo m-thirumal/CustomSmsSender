@@ -6,7 +6,8 @@
     "dependencies": {
         "aws-sdk": "2.1167.0",
         "base64-js": "1.5.1",
-        "@aws-crypto/client-node": "3.1.1"
+        "@aws-crypto/client-node": "3.1.1",
+        "springedge": "1.0.6"
     },
     "devDependencies": {
         "jest": "^26.6.3"
