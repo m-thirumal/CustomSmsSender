@@ -27,7 +27,7 @@ exports.handler = async(event) => {
     } else if (event.triggerSource == 'CustomSMSSender_ResendCode') {
         message = 'Dear ' + event.userAttributes.name + ', Your OTP ' + code + ' to verify/confirm the account'
     } else {
-        console.log("SMS message is not implemented.........for the trriger source", event.triggerSource)
+        console.log("SMS message is not implemented.....for the trriger source", event.triggerSource)
     }
     let client_phone = event.request.userAttributes.phone_number;
     console.log("phone_number => ", client_phone)
@@ -43,12 +43,12 @@ exports.handler = async(event) => {
       };
     console.log("params ", params)
     let value = await new Promise((resolve) => {
-    springedge.messages.send(params, 5000, function (err, response) {
-        if (err) {
-          return console.log("err: ", err);
-        }
-        console.log("response: ", response);
+        springedge.messages.send(params, 5000, function (err, response) {
+            if (err) {
+                return console.log("err: ", err);
+            }
+            console.log("response: ", response);
+        });
     });
-});
     console.log("Ending the service.....")
 }
