@@ -5,8 +5,8 @@ const springedge = require('springedge');
 
 const { decrypt } = encryptionSdk.buildClient(encryptionSdk.CommitmentPolicy.REQUIRE_ENCRYPT_ALLOW_DECRYPT)
 const keyIds = [process.env.KEY_ID];
-const sender = [process.env.sender];
-const apikey = [process.env.apikey];
+const sender = process.env.sender;
+const apikey = process.env.apikey;
 const keyring = new encryptionSdk.KmsKeyringNode({ keyIds })
 
 exports.handler = async(event) => {
@@ -17,7 +17,15 @@ exports.handler = async(event) => {
         plainTextCode = plaintext
     }
     console.log("Plain text code =>", plainTextCode)
-    
+    let buff = Buffer.from(plainTextCode, "base64")
+    let code = buff.toString("ascii")
+    console.log("Code ==> ", code)
+    if (event.triggerSource == 'CustomSMSSender_SignUp') {
+        message = 'Dear User, Your OTP to SignUp for eVoting is ' +  
+        code + ' and valid for 5 minutes. Do not disclose it to anyone for security reasons.'
+    } else {
+        console.log("SMS message is not implemented.........")
+    }
     let client_phone = event.request.userAttributes.phone_number;
     console.log("phone_number => ", client_phone)
     // Send SMS
@@ -27,7 +35,7 @@ exports.handler = async(event) => {
         'to': [
             client_phone  //Moblie Numbers 
         ],
-        'message': 'Dear User, Your OTP to SignUp for eVoting is {#var#} and valid for 5 minutes. Do not disclose it to anyone for security reasons.',
+        'message':  message,
         'format': 'json'
       };
     console.log("params ", params)
