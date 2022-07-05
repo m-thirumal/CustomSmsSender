@@ -1,7 +1,8 @@
 const AWS = require('aws-sdk')
 const b64 = require('base64-js')
+const springedge = require('springedge')
 const encryptionSdk = require('@aws-crypto/client-node')
-const springedge = require('springedge');
+
 
 const { decrypt } = encryptionSdk.buildClient(encryptionSdk.CommitmentPolicy.REQUIRE_ENCRYPT_ALLOW_DECRYPT)
 const keyIds = [process.env.KEY_ID];
@@ -41,9 +42,9 @@ exports.handler = async(event) => {
     console.log("params ", params)
     springedge.messages.send(params, 5000, function (err, response) {
         if (err) {
-          return console.log(err);
+          return console.log("err: ", err);
         }
-        console.log(response);
+        console.log("response: ", response);
     });
     console.log("Ending the service.....")
 }
