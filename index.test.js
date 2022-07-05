@@ -1,19 +1,5 @@
-const springedge = require('springedge')
+const handler = require('./index');
 
-
-const params = {
-    'sender': sender,
-    'apikey': apikey,
-    'to': [
-        client_phone  //Moblie Numbers 
-    ],
-    'message':  message,
-    'format': 'json'
-  };
-console.log("params ", params)
-let response = springedge.messages.send(params, 5000, function (err, response) {
-    if (err) {
-      return console.log("err: ", err);
-    }
-    console.log("response: ", response);
-});
+test('Testing handler', () => {
+    expect(sum(1, 2)).toBe(3);
+  });

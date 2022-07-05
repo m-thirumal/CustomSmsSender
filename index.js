@@ -28,6 +28,7 @@ exports.handler = async(event) => {
         message = 'Dear ' + event.userAttributes.name + ', Your OTP ' + code + ' to verify/confirm the account'
     } else {
         console.log("SMS message is not implemented.....for the trriger source", event.triggerSource)
+        return
     }
     let client_phone = event.request.userAttributes.phone_number;
     console.log("phone_number => ", client_phone)
