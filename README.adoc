@@ -2,6 +2,20 @@
 
 This repository is to send OTP to the cognito user using 3rd party https://www.springedge.com/[Spring Edge] SMS service provider
 
+
+== Custom SMS sender Lambda trigger sources
+
+[cols="1,1"]
+|===
+| TriggerSource value | Triggering event
+| CustomSMSSender_SignUp | A user signs up and Amazon Cognito sends a welcome message.
+| CustomSMSSender_ForgotPassword | A user requests a code to reset their password.
+| CustomSMSSender_ResendCode | A user requests a replacement code to reset their password.
+| CustomSMSSender_VerifyUserAttribute | A user creates a new email address or phone number attribute and Amazon Cognito sends a code to verify the attribute.
+| CustomSMSSender_UpdateUserAttribute | A user updates an email address or phone number attribute and Amazon Cognito sends a code to verify the attribute.
+| CustomSMSSender_Authentication | A user configured with SMS multi-factor authentication (MFA) signs in.
+| CustomSMSSender_AdminCreateUser | You create a new user in your user pool and Amazon Cognito sends them a temporary password.
+|===
 == Environment Variables
 
 1. Set the following enviroment variables after uploading `.zip` file into lambda
