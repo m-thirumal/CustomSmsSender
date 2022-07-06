@@ -21,11 +21,13 @@ exports.handler = async(event) => {
     let buff = Buffer.from(plainTextCode, "base64")
     let code = buff.toString("ascii")
     console.log("Code ==> ", code)
+    message = 'Dear ' + event.request.userAttributes.name + ', Your OTP '
     if (event.triggerSource == 'CustomSMSSender_SignUp') {
-        message = 'Dear ' + event.request.userAttributes.name + ', Your OTP to SignUp is ' +  
-        code + ' and valid for 5 minutes. Do not disclose it to anyone for security reasons.'
+        message += 'to SignUp is ' + code + ' and valid for 5 minutes. Do not disclose it to anyone for security reasons.'
     } else if (event.triggerSource == 'CustomSMSSender_ResendCode') {
-        message = 'Dear ' + event.request.userAttributes.name + ', Your OTP ' + code + ' to verify/confirm the account'
+        message += code + 'to verify/confirm the account'
+    } else if (event.triggerSource == 'CustomSMSSender_ForgotPassword') {
+        message = 'to reset the password is ' + code + '.'
     } else {
         console.log("SMS message is not implemented.....for the trriger source", event.triggerSource)
         return
