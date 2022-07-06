@@ -1,14 +1,14 @@
 = Custom SMS Sender
 
-This repository is to send OTP to the cognito user using 3rd party SMS service provider
+This repository is to send OTP to the cognito user using 3rd party https://www.springedge.com/[Spring Edge] SMS service provider
 
 == Environment Variables
 
 1. Set the following enviroment variables after uploading `.zip` file into lambda
 
-    ** KEY_ID - 
-    ** apikey
-    ** sender
+    ** KEY_ID - KMS ARN
+    ** apikey - Spring Edge/3rd Party SMS service provider API KEY
+    ** sender - Sender SMS Header (In India, DLT approval is must)
 
 == Deploy
 
@@ -24,3 +24,4 @@ This repository is to send OTP to the cognito user using 3rd party SMS service p
 3. Upload the `.zip` file to lambda.
 
 == Test
+
