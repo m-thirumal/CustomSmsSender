@@ -21,7 +21,7 @@ This repository is to send OTP to the cognito user using 3rd party https://www.s
 
 2. Create a `.zip` file by selecting all the files or by adding the index.js and node_modules folder in a zip & directories inside the project.
 
-3. Upload the `.zip` file to lambda.
+3. Upload the `.zip` file to lambda / AWS S3.
 
 == Test
 
