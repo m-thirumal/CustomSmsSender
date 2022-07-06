@@ -25,7 +25,7 @@ exports.handler = async(event) => {
     if (event.triggerSource == 'CustomSMSSender_SignUp') {
         message += 'to SignUp is ' + code + ' and valid for 5 minutes. Do not disclose it to anyone for security reasons.'
     } else if (event.triggerSource == 'CustomSMSSender_ResendCode') {
-        message += code + 'to verify/confirm the account'
+        message += code + ' to verify/confirm the account'
     } else if (event.triggerSource == 'CustomSMSSender_ForgotPassword') {
         message = 'to reset the password is ' + code + '.'
     } else {
