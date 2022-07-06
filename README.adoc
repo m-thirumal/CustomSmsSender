@@ -2,6 +2,14 @@
 
 This repository is to send OTP to the cognito user using 3rd party SMS service provider
 
+== Environment Variables
+
+1. Set the following enviroment variables after uploading `.zip` file into lambda
+
+    ** KEY_ID - 
+    ** apikey
+    ** sender
+
 == Deploy
 
 1. Run the following command to install all the dependencies
@@ -11,7 +19,7 @@ This repository is to send OTP to the cognito user using 3rd party SMS service p
     npm install
     ----
 
-2. Create a `.zip` file by selecting all the files & directories inside the project.
+2. Create a `.zip` file by selecting all the files or by adding the index.js and node_modules folder in a zip & directories inside the project.
 
 3. Upload the `.zip` file to lambda.
 
