@@ -1,5 +1,9 @@
 = Custom SMS Sender
 
+image::https://img.shields.io/badge/-javascript-333333?style=flat&logo=javascript[JavaScript] 
+image::https://img.shields.io/badge/-AWS%20Cloud-333333?style=flat&logo=amazon[AWS Cloud]
+
+
 This repository is to send OTP to the cognito user using 3rd party https://www.springedge.com/[Spring Edge] SMS service provider
 
 
