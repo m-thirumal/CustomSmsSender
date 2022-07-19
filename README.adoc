@@ -27,19 +27,26 @@ This repository is to send OTP to the cognito user using 3rd party https://www.s
     ** KEY_ID - KMS ARN
     ** apikey - Spring Edge/3rd Party SMS service provider API KEY
     ** sender - Sender SMS Header (In India, DLT approval is must)
+    --------------------E-mail Config---------------
+    ** Region - From which region AWS SES sending E-Mail
+    ** sender_email - 
+    ** email_signup_template - 
+    ** email_verify_template - 
+    ** email_forgot_password_template -
+    ** reply_email - 
 
 == Deploy
 
-1. Run the following command to install all the dependencies
+* Run the following command to install all the dependencies
 
-    [source, shell]
-    ----
-    npm install
-    ----
+[source, shell]
+----
+npm install
+----
 
-2. Create a `.zip` file by selecting all the files or by adding the index.js and node_modules folder in a zip & directories inside the project.
+* Create a `.zip` file by selecting all the files or by adding the index.js and node_modules folder in a zip & directories inside the project.
 
-3. Upload the `.zip` file to lambda / AWS S3.
+* Upload the `.zip` file to lambda / AWS S3.
 
 == Test
 

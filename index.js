@@ -21,13 +21,18 @@ exports.handler = async(event) => {
     let buff = Buffer.from(plainTextCode, "base64")
     let code = buff.toString("ascii")
     console.log("Code ==> ", code)
-    message = 'Dear ' + event.request.userAttributes.name + ', Your OTP '
+    let user = event.request.userAttributes.name
+    message = 'Dear ' + user + ', Your OTP '
+    emailTemplate = ""
     if (event.triggerSource == 'CustomSMSSender_SignUp') {
         message += 'to SignUp is ' + code + ' and valid for 5 minutes. Do not disclose it to anyone for security reasons.'
+        emailTemplate = process.env.email_signup_template
     } else if (event.triggerSource == 'CustomSMSSender_ResendCode') {
         message += code + ' to verify/confirm the account'
+        emailTemplate = process.env.email_verify_template
     } else if (event.triggerSource == 'CustomSMSSender_ForgotPassword') {
-        message = 'to reset the password is ' + code + '.'
+        message += 'to reset the password is ' + code + '.'
+        emailTemplate = process.env.email_forgot_password_template
     } else {
         console.log("SMS message is not implemented.....for the trriger source", event.triggerSource)
         return
@@ -45,13 +50,52 @@ exports.handler = async(event) => {
         'format': 'json'
       };
     console.log("params ", params)
-    let value = await new Promise((resolve) => {
+    await new Promise((resolve) => {
         springedge.messages.send(params, 5000, function (err, response) {
             if (err) {
-                return console.log("err: ", err);
+                console.log("err: ", err);
             }
+            resolve(response);
             console.log("response: ", response);
         });
     });
-    console.log("Ending the service.....")
+    console.log("Ending the SMS service.....")
+    //Send Email
+    if (emailTemplate =="") {
+        return;
+    }
+    // Set the region 
+    AWS.config.update({region: process.env.region});
+    let clientEmail = event.request.userAttributes.email;
+    template_data = "{ \"otp\": \"" + code + "\", \"user\": \"" + user +"\"}"
+    // Create sendTemplatedEmail params 
+    var emailParams = {
+        Destination: {
+            CcAddresses: [
+                clientEmail
+            ],
+            ToAddresses: [
+                clientEmail
+            ]
+        },
+        Source: process.env.sender_email,
+        Template: emailTemplate,
+        TemplateData: template_data, 
+        ReplyToAddresses: [
+            process.env.reply_email
+        ],
+    };
+    console.log("Email param  => ", emailParams)
+    // Create the promise and SES service object
+    var sendPromise = new AWS.SES({apiVersion: '2010-12-01'}).sendTemplatedEmail(emailParams).promise();
+
+    // Handle promise's fulfilled/rejected states
+    await sendPromise.then(
+    function(data) {
+        console.log(data);
+    }).catch(
+        function(err) {
+        console.error(err, err.stack);
+    });
+    console.log("The E-mail is sent")
 }
