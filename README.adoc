@@ -39,6 +39,8 @@ This repository is to send OTP to the cognito user using 3rd party https://www.s
 
 * Run the following command to install all the dependencies
 
+* Make sure the lambda has permission to invoke `SES`
+
 [source, shell]
 ----
 npm install
