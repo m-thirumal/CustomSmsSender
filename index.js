@@ -33,6 +33,9 @@ exports.handler = async(event) => {
     } else if (event.triggerSource == 'CustomSMSSender_ForgotPassword') {
         message += 'to reset the password is ' + code + '.'
         emailTemplate = process.env.email_forgot_password_template
+    } else if (event.triggerSource == 'CustomSMSSender_VerifyUserAttribute') {
+        message += 'to verify/confirm the account ' + code + '.'
+        emailTemplate = process.env.email_verify_template
     } else {
         console.log("SMS message is not implemented.....for the trriger source", event.triggerSource)
         return
